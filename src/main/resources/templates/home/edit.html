@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SVG editor</title>
+</head>
+<body>
+<svg width="6cm" height="5cm" viewBox="0 0 600 500">
+  <desc>Example script01 - invoke an ECMAScript function from an onclick event</desc>
+  <!-- ECMAScript to change the radius with each click -->
+  <script type="application/ecmascript"> //<![CDATA[
+    function circle_click(evt) {
+      var circle = evt.target;
+      var currentRadius = circle.getAttribute("r");
+      if (currentRadius == 100)
+        circle.setAttribute("r", currentRadius*2);
+      else
+        circle.setAttribute("r", currentRadius*0.5);
+    }
+  // ]]>
+  </script>
+
+  <!-- Outline the drawing area with a blue line -->
+  <rect x="1" y="1" width="598" height="498" fill="none" stroke="blue" />
+  <!-- Act on each click event -->
+  <circle onclick="circle_click(evt)" cx="300" cy="225" r="100" fill="red" />
+  <text x="300" y="480" font-family="Verdana" font-size="35" text-anchor="middle">Click on circle to change its size</text>
+</svg>
+<svg viewBox="0 0 10 10" height="120px" width="120px" xmlns="http://www.w3.org/2000/svg">
+  <script>
+    // <![CDATA[
+    window.addEventListener("DOMContentLoaded", () => {
+      function getColor() {
+        const R = Math.round(Math.random() * 255)
+          .toString(16)
+          .padStart(2, "0");
+
+        const G = Math.round(Math.random() * 255)
+          .toString(16)
+          .padStart(2, "0");
+
+        const B = Math.round(Math.random() * 255)
+          .toString(16)
+          .padStart(2, "0");
+
+        return `#${R}${G}${B}`;
+      }
+
+      document.querySelector("circle").addEventListener("click", (e) => {
+        e.target.style.fill = getColor();
+      });
+    });
+    // ]]>
+  </script>
+  <circle cx="5" cy="5" r="4" />
+</svg>
+<svg width="300" height="300">
+  <ellipse cx="150" cy="150" rx="100" ry="50" fill="#ccc" />
+  <text x="150" y="150" fill="#000">Hello, SVG!</text>
+</svg>
+<svg width="120" height="120">
+  <defs>
+    <marker id="Triangle" viewBox="0 0 10 10" refX="1" refY="5"
+        markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+  <polyline points="10,10 100,100" fill="none" stroke="black" 
+      stroke-width="2" marker-end="url(#Triangle)" />
+</svg>
+<svg width="200" height="150">
+    <rect width="200" height="150" stroke="orange" stroke-width="5" fill="yellow"/>
+    이 문장은 사용자의 웹 브라우저가 svg 요소를 지원하지 않을 때 나타납니다!
+</svg>
+<script>
+    "use strict"
+    var container = document.getElementById("container");
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M 0,0 h 0.1 v 0.1 h -0.1 z");
+    container.appendChild(path);
+</script>
+</body>
+</html>
