@@ -1,14 +1,41 @@
+# default - local
+spring.profiles.active: default
 spring:
-  security:
-    user:
-      name: user
-      password: user12#$
   thymeleaf:
 #    check-template-location: true
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML5
 #    cache: false
+---
+spring.config.activate.on-profile: default
+logging:
+  level:
+    root: debug
+    '[sun]': info
+    '[javax.management]': info
+spring:
+  autoconfigure.exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   devtools:
     livereload:
       enabled: true
+#  security:
+#    user:
+#      name: user
+#      password: user12#$
+#      roles:
+#      - USER
+#      - ADMIN
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-admin-password: pass12#$
+        web-allow-others: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: user
+    password: pass12#$

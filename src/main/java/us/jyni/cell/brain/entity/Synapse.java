@@ -5,6 +5,9 @@ package us.jyni.cell.brain.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 /**
@@ -12,12 +15,17 @@ import lombok.Data;
  *
  */
 @Data
+@Entity
 public class Synapse {
 	
-	private Neuron prev;
-	private Neuron next;
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+//	private Neuron prev;
+//	private Neuron next;
 
 	private String name;
-	private List<Tag> tags;
-	private Strength strength;
+//	private List<Tag> tags;
+//	private Strength strength;
 }
