@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>폼 입력 예시</title>
+	<meta charset="UTF-8" />
+	<style>
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			background-color: #fff;
+			border-radius: 8px;
+		}
+		
+		.heading {
+			font-size: 36px;
+			margin-bottom: 20px;
+			color: #333;
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+		
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 20px;
+			color: #333;
+			font-size: 16px;
+			text-align: center;
+		}
+		
+		th, td {
+			padding: 12px;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+		
+		.name {
+			color: #ec7c41;
+			font-weight: 600;
+		}
+		
+		.title {
+			color: #6495ed;
+			font-weight: 600;
+		}
+		
+		.content {
+			color: #888;
+			font-size: 14px;
+			line-height: 1.6;
+			text-align: left;
+		}
+		
+		.btn-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+		
+		.btn-add-form {
+			padding: 8px 20px;
+			border: none;
+			border-radius: 4px;
+			background-color: #6495ed;
+			color: #fff;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+		
+		.btn-add-form:hover {
+			background-color: #4169E1;
+		}
+		
+		.separator {
+			height: 1px;
+			margin: 20px 0;
+			background-color: #f2f2f2;
+			border: none;
+		}
+		
+		.form-container {
+			margin-bottom: 20px;
+			padding: 20px;
+			background-color: #f5f5f5;
+			border-radius: 4px;
+		}
+		
+		.form-field {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 20px;
+		}
+		
+		.form-field label {
+			margin-bottom: 8px;
+			color: #333;
+			font-weight: 600;
+			font-size: 16px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+		
+		.form-field input[type="text"], .form-field textarea {
+			padding: 12px;
+			border: none;
+			background-color: #fff;
+			border-radius: 4px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			color: #333;
+			font-size: 16px;
+		}
+		
+		.form-field input[type="text"]:focus, 
+		.form-field textarea:focus {
+		  border-color: #6495ed;
+		  box-shadow: 0 0 0 2px rgba(100,149,237,0.2);
+		}
+		
+		.btn-submit {
+		  padding: 10px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  background-color: #6495ed;
+		  color: #fff;
+		  font-size: 16px;
+		  font-weight: 600;
+		  cursor: pointer;
+		  transition: all 0.2s ease-in-out;
+		}
+		
+		.btn-submit:hover {
+		  background-color: #4169E1;
+		}
+		
+		.btn-cancel {
+		  padding: 10px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  background-color: #f2f2f2;
+		  color: #333;
+		  font-size: 16px;
+		  font-weight: 600;
+		  cursor: pointer;
+		  transition: all 0.2s ease-in-out;
+		}
+		
+		.btn-cancel:hover {
+		  background-color: #e6e6e6;
+		}
+		
+		.required {
+		  color: #ec7c41;
+		  font-weight: 600;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="btn-container">
+	  <button class="btn-add-form">Neuron 입력 폼</button>
+	</div>
+	<div class="form-container">
+	  <form action="#" th:object="${form}" method="post">
+	    <div class="form-field">
+	      <label for="name"><span class="required">*</span>이름:</label>
+	      <input type="text" id="name" th:field="*{name}" />
+	    </div>
+	    <div class="form-field">
+	      <label for="title"><span class="required">*</span>제목:</label>
+	      <input type="text" id="title" th:field="*{title}" />
+	    </div>
+	    <div class="form-field">
+	      <label for="content"><span class="required">*</span>내용:</label>
+	      <textarea id="content" rows="5" th:field="*{content}"></textarea>
+	    </div>
+	    <div class="btn-container">
+	      <button type="submit" class="btn-submit">저장</button>
+	      <button type="button" class="btn-cancel">취소</button>
+	      <button type="button" class="btn-cancel" onclick="location.href='/neuron'">목록</button>
+	    </div>
+	  </form>
+	</div>
+</div>
+</body>
+</html>

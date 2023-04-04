@@ -8,6 +8,8 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 /**
@@ -22,10 +24,13 @@ public class Synapse {
 	@GeneratedValue
 	private Long id;
 	
-//	private Neuron prev;
-//	private Neuron next;
+	@ManyToOne
+	private Neuron prev;
+	@ManyToOne
+	private Neuron next;
 
 	private String name;
-//	private List<Tag> tags;
+	@OneToMany
+	private List<Tag> tags;
 //	private Strength strength;
 }

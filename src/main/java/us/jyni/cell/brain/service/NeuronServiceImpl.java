@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Resource;
+import us.jyni.cell.brain.base.EntityView;
 import us.jyni.cell.brain.entity.Neuron;
 import us.jyni.cell.brain.repos.NeuronRepository;
 
@@ -21,31 +22,29 @@ public class NeuronServiceImpl implements NeuronService {
 
 	@Resource
 	private NeuronRepository repository;
+
+	@Override
+	public List<NeuronView> findAll() {
+		List<Neuron> entities = repository.findAll();
+		return EntityView.from(entities, NeuronView.class);
+	}
+
+	@Override
+	public List<NeuronView> findNeurons(String name) {
+		List<Neuron> entities = repository.findNeuronsByName(name);
+		return EntityView.from(entities, NeuronView.class);
+	}
 	
 	@Override
-	public void test() {
-		
-		repository.save(neuron());
+	public Optional<NeuronView> getNeuron(Long id) {
+		Optional<Neuron> optional = repository.findNeuronById(id);
+		return EntityView.of(optional, NeuronView.class);
 	}
 
 	@Override
-	public List<Neuron> findNeurons(String name) {
-		return repository.findNeuronsByName(name);
-	}
-	
-	@Override
-	public Optional<Neuron> getNeuron(Long id) {
-		return repository.findNeuronById(id);
-	}
-
-	private Neuron neuron() {
-
-		Neuron neuron = new Neuron();
-//		neuron.setId(1L);
-		neuron.setName("새 뉴런");
-		neuron.setTitle("새 뉴런을 등록합니다.");
-		neuron.setContent("새 뉴런 컨텐츠");
-		
-		return neuron;
+	public void save(NeuronForm form) {
+		Neuron entity = form.getEntity();
+		repository.save(entity);
+		form.setId(entity.getId());
 	}
 }

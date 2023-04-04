@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import us.jyni.cell.brain.entity.Neuron;
@@ -30,10 +29,4 @@ public interface NeuronRepository extends JpaRepository<Neuron, Long>  {
 	 * @return
 	 */
 	public Optional<Neuron> findNeuronById(Long id);
-	
-	/**
-	 * @param entity
-	 * @return
-	 */
-	public void delete(Neuron entity);
 }

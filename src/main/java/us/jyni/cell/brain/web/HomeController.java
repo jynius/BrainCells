@@ -3,14 +3,11 @@
  */
 package us.jyni.cell.brain.web;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.annotation.Resource;
-import us.jyni.cell.brain.entity.Neuron;
 import us.jyni.cell.brain.service.NeuronService;
 
 /**
@@ -32,15 +29,5 @@ public class HomeController {
 	@GetMapping("/edit") 
 	public String edit() {
 		return "home/edit";
-	}
-	
-	@GetMapping("/insert") 
-	@ResponseBody
-	public Neuron insert() {
-		
-		neuronService.test();
-		Optional<Neuron> optional = neuronService.getNeuron(1L);
-		
-		return optional.get();
 	}
 }

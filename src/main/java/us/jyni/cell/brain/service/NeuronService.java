@@ -6,17 +6,17 @@ package us.jyni.cell.brain.service;
 import java.util.List;
 import java.util.Optional;
 
-import us.jyni.cell.brain.entity.Neuron;
-
 /**
  * @author jynius
  *
  */
 public interface NeuronService {
 
-	public void test();
+	public List<NeuronView> findAll();
 
-	public List<Neuron> findNeurons(String name);
+	public List<NeuronView> findNeurons(String name);
 
-	public Optional<Neuron> getNeuron(Long id);
+	public Optional<NeuronView> getNeuron(Long id);
+
+	public void save(NeuronForm form);
 }
