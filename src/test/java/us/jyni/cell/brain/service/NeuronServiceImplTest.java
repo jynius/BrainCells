@@ -28,6 +28,6 @@ class NeuronServiceImplTest {
 	 */
 	@Test
 	void testTest() {
-		service.test();
+		service.findAll();
 	}
 }

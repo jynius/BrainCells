@@ -96,7 +96,9 @@
 					<th class="id">No</th>
 					<th class="name">이름</th>
 					<th class="title">제목</th>
-					<th class="content">내용</th>
+					<!-- <th class="content">내용</th> -->
+					<th class="content">Prev Synapses</th>
+					<th class="content">Next Synapses</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -104,7 +106,12 @@
 					<td class="id" th:text="${form.id}"></td>
 					<td class="name"><a th:text="${form.name}" th:href="@{/neuron/edit?id={id}(id=${form.id})}"></a></td>
 					<td class="title" th:text="${form.title}"></td>
-					<td class="content" th:text="${form.content}"></td>
+					<td class="content">
+						<div th:each="pf, s : ${form.prev}"><span th:text="${pf.name}"></span></div>
+					</td>
+					<td class="content">
+						<div th:each="nf, s : ${form.next}"><span th:text="${nf.name}"></span></div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

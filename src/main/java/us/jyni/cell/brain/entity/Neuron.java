@@ -34,6 +34,18 @@ public class Neuron {
 	@OneToMany(mappedBy = "prev", cascade = CascadeType.ALL)
 	private List<Synapse> next;
 
+	public void setPrev(List<Synapse> prev) {
+		this.prev = prev==null? null: prev.stream()
+				.peek(e->e.setNext(this))
+				.toList();
+	}
+
+	public void setNext(List<Synapse> next) {
+		this.next = next==null? null: next.stream()
+				.peek(e->e.setPrev(this))
+				.toList();
+	}
+	
 	public boolean valid() {
 		return valid(prev, e->e.getNext()) && valid(next, e->e.getPrev());
 	}

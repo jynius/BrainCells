@@ -3,6 +3,7 @@
  */
 package us.jyni.cell.brain.web;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import jakarta.annotation.Resource;
 import us.jyni.cell.brain.service.NeuronForm;
 import us.jyni.cell.brain.service.NeuronService;
 import us.jyni.cell.brain.service.NeuronView;
+import us.jyni.cell.brain.service.SynapseView;
 
 /**
  * @author jynius
@@ -42,7 +44,25 @@ public class NeuronController {
 	public String edit(Model model, @RequestParam(name="id", required = false) Long id) {
 		
 		Optional<NeuronView> optional = neuronService.getNeuron(id);
-		model.addAttribute("form", optional.orElse(new NeuronView()));
+		NeuronView view = optional.orElse(new NeuronView());
+		
+//		List<SynapseView> prev = view.getPrev();
+//		if(prev==null) {
+//			view.setPrev(Collections.singletonList(SynapseView.builder().id(1L).name("Prev Synapse").build()));
+//		}
+//		else {
+//			prev.add(SynapseView.builder().id(1L).name("Prev Synapse").build());
+//		}
+//		
+//		List<SynapseView> next = view.getNext();
+//		if(next==null) {
+//			view.setNext(Collections.singletonList(SynapseView.builder().id(2L).name("Next Synapse").build()));
+//		}
+//		else {
+//			next.add(SynapseView.builder().id(2L).name("Next Synapse").build());
+//		}
+		
+		model.addAttribute("form", view);
 		
 		return "neuron/edit";
 	}

@@ -182,6 +182,27 @@
 	      <label for="content"><span class="required">*</span>내용:</label>
 	      <textarea id="content" rows="5" th:field="*{content}"></textarea>
 	    </div>
+        <!-- Render SynapseForm list as checkboxes -->
+	    <div class="form-field">
+	        <label for="prev">Prev Synapses:</label>
+	        <div th:each="pf, s : ${form.prev}">
+	            <input type="hidden" th:field="*{prev[__${s.index}__].id}" th:value="${pf.id}">
+	            <input type="text" th:field="*{prev[__${s.index}__].name}" th:value="${pf.name}">
+	        </div>
+        	<div>
+	            <input type="text" id="newprev.name" th:attr="name='prev[' + ${form.prev==null? 0: #lists.size(form.prev)} + '].name'">
+        	</div>
+        </div>
+	    <div class="form-field">
+	        <label for="next">Next Synapses:</label>
+	        <div th:each="nf, s : ${form.next}">
+	            <input type="hidden" th:field="*{next[__${s.index}__].id}" th:value="${nf.id}">
+	            <input type="text" th:field="*{next[__${s.index}__].name}" th:value="${nf.name}">
+	        </div>
+        	<div>
+	            <input type="text" id="newnext.name" th:attr="name='next[' + ${form.next==null? 0: #lists.size(form.next)} + '].name'">
+        	</div>
+	    </div>
 	    <div class="btn-container">
 	      <button type="submit" class="btn-submit">저장</button>
 	      <button type="button" class="btn-cancel">취소</button>
