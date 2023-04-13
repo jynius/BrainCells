@@ -3,7 +3,6 @@
  */
 package us.jyni.cell.brain.web;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.annotation.Resource;
-import us.jyni.cell.brain.service.NeuronForm;
+import us.jyni.cell.brain.base.Filter;
+import us.jyni.cell.brain.entity.NeuronFormView;
 import us.jyni.cell.brain.service.NeuronService;
-import us.jyni.cell.brain.service.NeuronView;
-import us.jyni.cell.brain.service.SynapseView;
 
 /**
  * @author jynius
- *
+ * @since 2023-04-01
  */
 @Controller
 @RequestMapping("/neuron")
@@ -31,20 +29,46 @@ public class NeuronController {
 	@Resource
 	private NeuronService neuronService;
 	
+	/**
+	 * <p>Neuron의 전체 목록에 대해 diagram을 그림.</p>
+	 * 
+	 * @param model front에 표시할 데이타를 담을 container
+	 * @return view path
+	 */
 	@GetMapping
+	public String diagram(Model model) {
+		
+		List<NeuronFormView> views = neuronService.findAll(Filter.empty(), NeuronFormView.class);
+		model.addAttribute("forms", views);
+		
+		return "neuron/diagram";
+	}
+
+	/**
+	 * <p>Neuron의 전체 목록</p>
+	 * 
+	 * @param model front에 표시할 데이타를 담을 container
+	 * @return view path
+	 */
+	@GetMapping("/list")
 	public String list(Model model) {
 		
-		List<NeuronView> views = neuronService.findAll();
+		List<NeuronFormView> views = neuronService.findAll(Filter.empty(), NeuronFormView.class);
 		model.addAttribute("forms", views);
 		
 		return "neuron/list";
 	}
 	
+	/**
+	 * @param model front에 표시할 데이타를 담을 container
+	 * @param id id for querying and edit
+	 * @return view path
+	 */
 	@GetMapping("/edit") 
 	public String edit(Model model, @RequestParam(name="id", required = false) Long id) {
 		
-		Optional<NeuronView> optional = neuronService.getNeuron(id);
-		NeuronView view = optional.orElse(new NeuronView());
+		Optional<NeuronFormView> optional = neuronService.getNeuron(id);
+		NeuronFormView view = optional.orElse(new NeuronFormView());
 		
 //		List<SynapseView> prev = view.getPrev();
 //		if(prev==null) {
@@ -67,8 +91,12 @@ public class NeuronController {
 		return "neuron/edit";
 	}
 	
+	/**
+	 * @param form data for saving
+	 * @return view path
+	 */
 	@PostMapping("/edit")
-	public String edit(NeuronForm form) {
+	public String edit(NeuronFormView form) {
 		
 		neuronService.save(form);
 		

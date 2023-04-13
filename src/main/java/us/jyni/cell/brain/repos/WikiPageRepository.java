@@ -1,4 +1,4 @@
-/*
+/**
  * 
  */
 package us.jyni.cell.brain.repos;
@@ -6,13 +6,13 @@ package us.jyni.cell.brain.repos;
 import org.springframework.stereotype.Repository;
 
 import us.jyni.cell.brain.base.GenericRepository;
-import us.jyni.cell.brain.entity.Synapse;
+import us.jyni.cell.brain.entity.WikiPage;
 
 /**
  * @author jynius
- * @since 2023-04-01
+ *
  */
 @Repository
-public interface SynapseRepository extends GenericRepository<Synapse, Long> {
+public interface WikiPageRepository extends GenericRepository<WikiPage, Long> {
 
 }

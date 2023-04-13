@@ -14,7 +14,7 @@ import lombok.Data;
 
 /**
  * @author USER
- *
+ * @since 2023-03-18
  */
 @Data
 @Entity

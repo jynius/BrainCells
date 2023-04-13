@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import jakarta.annotation.Resource;
+import us.jyni.cell.brain.base.Filter;
+import us.jyni.cell.brain.entity.NeuronFormView;
 
 /**
  * @author jynius
@@ -28,6 +30,6 @@ class NeuronServiceImplTest {
 	 */
 	@Test
 	void testTest() {
-		service.findAll();
+		service.findAll(Filter.empty(), NeuronFormView.class);
 	}
 }
